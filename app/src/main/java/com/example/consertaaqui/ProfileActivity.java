@@ -22,6 +22,13 @@ public class ProfileActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         btnSalvar = findViewById(R.id.btnSalvar);
 
+        // Recuperar dados salvos
+        String nome = getSharedPreferences("cadastro", MODE_PRIVATE).getString("nome", "");
+        String email = getSharedPreferences("cadastro", MODE_PRIVATE).getString("email", "");
+
+        edtNome.setText(nome);
+        edtEmail.setText(email);
+
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

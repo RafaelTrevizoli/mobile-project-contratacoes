@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
+    private Button btnCadastrarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
+        btnCadastrarLogin = findViewById(R.id.btnCadastrarLogin);
+
+        btnCadastrarLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,16 +41,20 @@ public class MainActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
 
                 if (email.isEmpty() || password.isEmpty()) {
-                    // Exibe mensagem se algum campo estiver vazio
                     Toast.makeText(MainActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Exibe mensagem de sucesso (simulação de login bem-sucedido)
-                    Toast.makeText(MainActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+                    // Recuperar dados cadastrados
+                    String emailCadastrado = getSharedPreferences("cadastro", MODE_PRIVATE).getString("email", "");
+                    String senhaCadastrada = getSharedPreferences("cadastro", MODE_PRIVATE).getString("senha", "");
 
-                    // Após o login, abre a tela principal
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();  // Fecha a tela de login
+                    if (email.equals(emailCadastrado) && password.equals(senhaCadastrada)) {
+                        Toast.makeText(MainActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Email ou senha inválidos", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

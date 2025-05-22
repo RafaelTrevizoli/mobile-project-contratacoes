@@ -35,9 +35,17 @@ public class CadastroActivity extends AppCompatActivity {
                 if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || tipoUsuario.isEmpty()) {
                     Toast.makeText(CadastroActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Lógica de cadastro
+                    // Salvar usando SharedPreferences
+                    getSharedPreferences("cadastro", MODE_PRIVATE)
+                            .edit()
+                            .putString("nome", nome)
+                            .putString("email", email)
+                            .putString("senha", senha)
+                            .putString("tipoUsuario", tipoUsuario)
+                            .apply();
+
                     Toast.makeText(CadastroActivity.this, "Cadastro realizado com sucesso", Toast.LENGTH_SHORT).show();
-                    finish();  // Fecha a tela de cadastro e volta para a tela anterior
+                    finish();
                 }
             }
         });
