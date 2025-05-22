@@ -1,47 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bem-vindo ao ConsertaAqui!"
-        android:textSize="24sp"
-        android:textColor="#000"
-        android:gravity="center"
-        android:layout_marginTop="50dp"/>
-
-    <Button
-        android:id="@+id/btnFindService"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buscar Prestador de Serviço"
-        android:layout_marginTop="20dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnCadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cadastrar Novo Usuário"
-        android:layout_marginTop="20dp"/>
+        <!-- CLIENTE -->
+        <LinearLayout
+            android:id="@+id/layoutCliente"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-    <Button
-        android:id="@+id/btnProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver Perfil"
-        android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/btnSolicitarServico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Solicitar Serviço" />
 
-    <Button
-        android:id="@+id/btnRequestService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solicitar Serviço"
-        android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/btnHistoricoCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Histórico de Solicitações"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
 
-</LinearLayout>
+        <!-- PRESTADOR -->
+        <LinearLayout
+            android:id="@+id/layoutPrestador"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btnCadastrarServico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar Serviço" />
+
+            <Button
+                android:id="@+id/btnMeusServicos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Meus Serviços"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

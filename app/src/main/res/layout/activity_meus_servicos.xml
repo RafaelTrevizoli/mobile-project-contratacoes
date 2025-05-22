@@ -6,17 +6,16 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/txtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Solicitação de Serviço"
+        android:text="Meus Serviços Cadastrados"
         android:textSize="20sp"
-        android:textColor="#000"
-        android:layout_marginBottom="20dp" />
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp" />
 
-    <Button
-        android:id="@+id/btnConfirmar"
+    <ListView
+        android:id="@+id/listViewServicos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmar Solicitação"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="match_parent" />
 </LinearLayout>
