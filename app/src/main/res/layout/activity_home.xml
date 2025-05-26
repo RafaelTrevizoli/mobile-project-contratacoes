@@ -1,12 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/txtTituloMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu Principal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#064E3B"
+            android:layout_marginBottom="24dp" />
 
         <!-- CLIENTE -->
         <LinearLayout
@@ -20,14 +33,27 @@
                 android:id="@+id/btnSolicitarServico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Solicitar Serviço" />
+                android:text="Solicitar Serviço"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#3F51B5"
+                android:textColor="#fff"
+                android:padding="14dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="12dp" />
 
             <Button
                 android:id="@+id/btnHistoricoCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Histórico de Solicitações"
-                android:layout_marginTop="10dp" />
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#10B981"
+                android:textColor="#fff"
+                android:padding="14dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="24dp" />
         </LinearLayout>
 
         <!-- PRESTADOR -->
@@ -42,14 +68,27 @@
                 android:id="@+id/btnCadastrarServico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadastrar Serviço" />
+                android:text="Cadastrar Serviço"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#3F51B5"
+                android:textColor="#fff"
+                android:padding="14dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="12dp" />
 
             <Button
                 android:id="@+id/btnMeusServicos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Meus Serviços"
-                android:layout_marginTop="10dp" />
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#10B981"
+                android:textColor="#fff"
+                android:padding="14dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="24dp" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

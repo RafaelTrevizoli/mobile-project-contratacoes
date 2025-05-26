@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F5F5F5">
 
-    <EditText
-        android:id="@+id/edtTitulo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Título do Serviço" />
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/edtDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Descrição"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar Serviço"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#064E3B"
+            android:layout_marginBottom="24dp" />
 
-    <Button
-        android:id="@+id/btnCadastrarServico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cadastrar Serviço"
-        android:layout_marginTop="20dp" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/edtTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Título do Serviço"
+            android:background="@drawable/edit_text_background"
+            android:padding="14dp"
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/edtDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Descrição"
+            android:background="@drawable/edit_text_background"
+            android:padding="14dp"
+            android:textColor="#000"
+            android:textColorHint="#888"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnCadastrarServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar Serviço"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:backgroundTint="#10B981"
+            android:textColor="#fff"
+            android:padding="14dp"
+            android:elevation="4dp" />
+    </LinearLayout>
+</ScrollView>
+

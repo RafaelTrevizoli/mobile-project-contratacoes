@@ -1,11 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F5F5F5"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/txtTituloServicosCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Serviços Solicitados"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#064E3B"
+        android:layout_marginBottom="16dp" />
 
     <ListView
         android:id="@+id/listViewServicosCliente"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:elevation="2dp" />
 </LinearLayout>
