@@ -36,21 +36,24 @@ public class SolicitacoesRecebidasActivity extends AppCompatActivity {
     }
 
     private void carregarSolicitacoes() {
-        String query = "SELECT s.titulo, sol.email_cliente, sol.observacao " +
+        String query = "SELECT s.id, s.titulo, sol.email_cliente, sol.observacao " +
                 "FROM solicitacoes sol " +
                 "JOIN servicos s ON sol.id_servico = s.id " +
                 "WHERE s.email_prestador = ?";
 
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, new String[]{emailPrestador});
-
         ArrayList<String> lista = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {
-                String titulo = cursor.getString(0);
-                String cliente = cursor.getString(1);
-                String observacao = cursor.getString(2);
-                lista.add("• " + titulo + "\nCliente: " + cliente + "\nObs: " + observacao);
+                int idServico = cursor.getInt(0);
+                String titulo = cursor.getString(1);
+                String cliente = cursor.getString(2);
+                String observacao = cursor.getString(3);
+
+                String avaliacaoStr = obterMediaAvaliacoes(idServico);
+
+                lista.add("• " + titulo + "\nCliente: " + cliente + "\nObs: " + observacao + avaliacaoStr);
             } while (cursor.moveToNext());
         } else {
             lista.add("Nenhuma solicitação recebida ainda.");
@@ -62,5 +65,22 @@ public class SolicitacoesRecebidasActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1, lista
         );
         listViewRecebidas.setAdapter(adapter);
+    }
+
+    private String obterMediaAvaliacoes(int idServico) {
+        String query = "SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE id_servico = ?";
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, new String[]{String.valueOf(idServico)});
+        String resultado = "";
+
+        if (cursor.moveToFirst()) {
+            double media = cursor.getDouble(cursor.getColumnIndexOrThrow("media"));
+            int total = cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+            if (total > 0) {
+                resultado = String.format("\n⭐ Média: %.1f (%d avaliações)", media, total);
+            }
+        }
+
+        cursor.close();
+        return resultado;
     }
 }

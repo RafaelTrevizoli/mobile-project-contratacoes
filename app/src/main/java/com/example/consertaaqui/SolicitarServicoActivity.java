@@ -51,7 +51,10 @@ public class SolicitarServicoActivity extends AppCompatActivity {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
                 String titulo = cursor.getString(cursor.getColumnIndexOrThrow("titulo"));
                 String descricao = cursor.getString(cursor.getColumnIndexOrThrow("descricao"));
-                lista.add("• " + titulo + "\n" + descricao);
+
+                String avaliacaoStr = obterMediaAvaliacoes(id);
+
+                lista.add("• " + titulo + "\n" + descricao + avaliacaoStr);
                 listaIds.add(id);
             } while (cursor.moveToNext());
         } else {
@@ -64,6 +67,23 @@ public class SolicitarServicoActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1, lista
         );
         listViewServicos.setAdapter(adapter);
+    }
+
+    private String obterMediaAvaliacoes(int idServico) {
+        String query = "SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacoes WHERE id_servico = ?";
+        Cursor cursor = dbHelper.getReadableDatabase().rawQuery(query, new String[]{String.valueOf(idServico)});
+        String resultado = "";
+
+        if (cursor.moveToFirst()) {
+            double media = cursor.getDouble(cursor.getColumnIndexOrThrow("media"));
+            int total = cursor.getInt(cursor.getColumnIndexOrThrow("total"));
+            if (total > 0) {
+                resultado = String.format("\n⭐ Média: %.1f (%d avaliações)", media, total);
+            }
+        }
+
+        cursor.close();
+        return resultado;
     }
 
     private void exibirDialogoSolicitacao(int idServico) {

@@ -11,6 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "conserta_aqui.db";
     private static final int DATABASE_VERSION = 1;
 
+    // Tabelas e colunas
     public static final String TABLE_USUARIOS = "usuarios";
     public static final String COL_ID = "id";
     public static final String COL_NOME = "nome";
@@ -30,6 +31,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_ID_SERVICO = "id_servico";
     public static final String COL_EMAIL_CLIENTE = "email_cliente";
     public static final String COL_OBSERVACAO = "observacao";
+
+    public static final String TABLE_AVALIACOES = "avaliacoes";
+    public static final String COL_AVALIACAO_ID = "id";
+    public static final String COL_ID_SERVICO_AVALIADO = "id_servico";
+    public static final String COL_EMAIL_CLIENTE_AVALIACAO = "email_cliente";
+    public static final String COL_NOTA = "nota";
+    public static final String COL_COMENTARIO = "comentario";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,9 +65,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COL_EMAIL_CLIENTE + " TEXT, "
                 + COL_OBSERVACAO + " TEXT)";
 
+        String CREATE_AVALIACOES = "CREATE TABLE " + TABLE_AVALIACOES + " ("
+                + COL_AVALIACAO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_ID_SERVICO_AVALIADO + " INTEGER, "
+                + COL_EMAIL_CLIENTE_AVALIACAO + " TEXT, "
+                + COL_NOTA + " INTEGER, "
+                + COL_COMENTARIO + " TEXT)";
+
         db.execSQL(CREATE_USUARIOS);
         db.execSQL(CREATE_SERVICOS);
         db.execSQL(CREATE_SOLICITACOES);
+        db.execSQL(CREATE_AVALIACOES);
     }
 
     @Override
@@ -67,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SOLICITACOES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_AVALIACOES);
         onCreate(db);
     }
 
@@ -77,7 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_EMAIL, email);
         values.put(COL_SENHA, senha);
         values.put(COL_TIPO, tipo);
-        values.put(COL_TIPO_SERVICO, ""); // Por padrão
+        values.put(COL_TIPO_SERVICO, "");
 
         long result = db.insert(TABLE_USUARIOS, null, values);
         return result != -1;
@@ -171,5 +188,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_DESCRICAO, novaDescricao);
         int result = db.update(TABLE_SERVICOS, values, COL_SERVICO_ID + "=?", new String[]{String.valueOf(id)});
         return result > 0;
+    }
+
+    // 🔥 NOVO MÉTODO: cadastrar avaliação
+    public boolean cadastrarAvaliacao(int idServico, String emailCliente, int nota, String comentario) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_ID_SERVICO_AVALIADO, idServico);
+        values.put(COL_EMAIL_CLIENTE_AVALIACAO, emailCliente);
+        values.put(COL_NOTA, nota);
+        values.put(COL_COMENTARIO, comentario);
+        long result = db.insert(TABLE_AVALIACOES, null, values);
+        return result != -1;
+    }
+
+    // 🔥 NOVO MÉTODO: calcular média de notas
+    public float calcularMediaAvaliacao(int idServico) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT AVG(nota) FROM " + TABLE_AVALIACOES + " WHERE " + COL_ID_SERVICO_AVALIADO + " = ?", new String[]{String.valueOf(idServico)});
+        float media = 0;
+        if (cursor.moveToFirst()) {
+            media = cursor.getFloat(0);
+        }
+        cursor.close();
+        return media;
     }
 }
