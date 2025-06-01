@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutPrincipal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,11 +11,20 @@
         android:id="@+id/txtTituloServicosCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Serviços Solicitados"
+        android:text="Serviços Disponíveis"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#064E3B"
         android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/edtBuscaSolicitacoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar por título ou descrição"
+        android:padding="12dp"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="12dp" />
 
     <ListView
         android:id="@+id/listViewServicosCliente"

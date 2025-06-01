@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_EMAIL = "email";
     public static final String COL_SENHA = "senha";
     public static final String COL_TIPO = "tipo_usuario";
+    public static final String COL_TIPO_SERVICO = "tipo_servico";
 
     public static final String TABLE_SERVICOS = "servicos";
     public static final String COL_SERVICO_ID = "id";
@@ -41,7 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COL_NOME + " TEXT, "
                 + COL_EMAIL + " TEXT UNIQUE, "
                 + COL_SENHA + " TEXT, "
-                + COL_TIPO + " TEXT)";
+                + COL_TIPO + " TEXT, "
+                + COL_TIPO_SERVICO + " TEXT)";
 
         String CREATE_SERVICOS = "CREATE TABLE " + TABLE_SERVICOS + " ("
                 + COL_SERVICO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -75,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_EMAIL, email);
         values.put(COL_SENHA, senha);
         values.put(COL_TIPO, tipo);
+        values.put(COL_TIPO_SERVICO, ""); // Por padrão
 
         long result = db.insert(TABLE_USUARIOS, null, values);
         return result != -1;
@@ -118,12 +121,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public boolean atualizarUsuario(String email, String novoNome, String novoEmail) {
+    public String buscarTipoServico(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT tipo_servico FROM usuarios WHERE email = ?", new String[]{email});
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }
+        cursor.close();
+        return "";
+    }
+
+    public boolean atualizarPerfil(String emailOriginal, String nomeNovo, String emailNovo, String tipoServico) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COL_NOME, novoNome);
-        values.put(COL_EMAIL, novoEmail);
-        int rows = db.update(TABLE_USUARIOS, values, COL_EMAIL + "=?", new String[]{email});
+        values.put(COL_NOME, nomeNovo);
+        values.put(COL_EMAIL, emailNovo);
+        values.put(COL_TIPO_SERVICO, tipoServico);
+        int rows = db.update(TABLE_USUARIOS, values, COL_EMAIL + "=?", new String[]{emailOriginal});
         return rows > 0;
     }
 

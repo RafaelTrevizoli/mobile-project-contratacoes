@@ -1,6 +1,7 @@
 package com.example.consertaaqui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,8 +41,14 @@ public class MainActivity extends AppCompatActivity {
                         String tipo = dbHelper.buscarTipoUsuario(email);
                         Toast.makeText(MainActivity.this, "Login como " + tipo, Toast.LENGTH_SHORT).show();
 
+                        // 🧠 Salvar login no SharedPreferences
+                        SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE).edit();
+                        editor.putString("email", email);
+                        editor.putString("tipo", tipo);
+                        editor.apply();
+
                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        intent.putExtra("email_usuario", email);  // envia o email para outras telas se necessário
+                        intent.putExtra("email_usuario", email);
                         startActivity(intent);
                         finish();
                     } else {

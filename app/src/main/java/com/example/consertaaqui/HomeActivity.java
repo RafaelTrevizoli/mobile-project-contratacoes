@@ -1,11 +1,13 @@
 package com.example.consertaaqui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
@@ -41,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         Button btnHistorico = findViewById(R.id.btnHistoricoCliente);
         Button btnCadastrarServico = findViewById(R.id.btnCadastrarServico);
         Button btnServicosPrestador = findViewById(R.id.btnMeusServicos);
+        Button btnSolicitacoesRecebidas = findViewById(R.id.btnSolicitacoesRecebidas);
 
         btnSolicitar.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, SolicitarServicoActivity.class);
@@ -65,5 +68,19 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("email_usuario", emailUsuario);
             startActivity(intent);
         });
+
+        btnSolicitacoesRecebidas.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SolicitacoesRecebidasActivity.class);
+            startActivity(intent);
+        });
+
+        Button btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> {
+            getSharedPreferences("login", MODE_PRIVATE).edit().clear().apply();
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
     }
 }

@@ -22,6 +22,8 @@
 
         <activity android:name=".HistoricoSolicitacoesActivity" />
 
+        <activity android:name=".SolicitacoesRecebidasActivity" />
+
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

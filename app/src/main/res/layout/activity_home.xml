@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,88 +6,108 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/txtTituloMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="Menu Principal"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:textColor="#064E3B"
-            android:layout_marginBottom="24dp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- CLIENTE -->
         <LinearLayout
             android:id="@+id/layoutCliente"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:visibility="gone">
 
             <Button
                 android:id="@+id/btnSolicitarServico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#3F51B5"
+                android:elevation="4dp"
+                android:padding="14dp"
                 android:text="Solicitar Serviço"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:backgroundTint="#3F51B5"
                 android:textColor="#fff"
-                android:padding="14dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="12dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnHistoricoCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#10B981"
+                android:elevation="4dp"
+                android:padding="14dp"
                 android:text="Ver Histórico de Solicitações"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:backgroundTint="#10B981"
                 android:textColor="#fff"
-                android:padding="14dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="24dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- PRESTADOR -->
         <LinearLayout
             android:id="@+id/layoutPrestador"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:visibility="gone">
 
             <Button
                 android:id="@+id/btnCadastrarServico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#3F51B5"
+                android:elevation="4dp"
+                android:padding="14dp"
                 android:text="Cadastrar Serviço"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:backgroundTint="#3F51B5"
                 android:textColor="#fff"
-                android:padding="14dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="12dp" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnMeusServicos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#10B981"
+                android:elevation="4dp"
+                android:padding="14dp"
                 android:text="Ver Meus Serviços"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:backgroundTint="#10B981"
                 android:textColor="#fff"
-                android:padding="14dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnSolicitacoesRecebidas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#F59E0B"
                 android:elevation="4dp"
-                android:layout_marginBottom="24dp" />
+                android:padding="14dp"
+                android:text="Solicitações Recebidas"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="16sp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sair" />
     </LinearLayout>
 </ScrollView>
